@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>star</title>
+    <style >
+        body {
+            background: #bab1bf;
+        }
+        .box {
+            width: 500px;
+            height: 90px;
+            margin: 200px auto;
+            padding: 0 30px;
+            border: 1px solid #fff;
+        }
+        .star {
+            cursor: pointer;
+            height: 50px;
+            width: 50px;
+            margin: 20px 25px;
+            float: left;
+            background-color: #faf0ff;
+            -webkit-clip-path: polygon(
+                    50% 0%,
+                    61% 35%,
+                    98% 35%,
+                    68% 57%,
+                    79% 91%,
+                    50% 70%,
+                    21% 91%,
+                    32% 57%,
+                    2% 35%,
+                    39% 35%
+            );
+            clip-path: polygon(
+                    50% 0%,
+                    61% 35%,
+                    98% 35%,
+                    68% 57%,
+                    79% 91%,
+                    50% 70%,
+                    21% 91%,
+                    32% 57%,
+                    2% 35%,
+                    39% 35%
+            );
+        }
+        .star.active {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="star active"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+</div>
+
+
+<script>
+    var Box = document.querySelector(".box"),
+        Star = document.querySelectorAll(".star");
+
+    Box.onclick = function(e) {
+        var target = e.target;
+        if (target.classList.contains("star")) {
+            removeClass(Star, "current-active");
+            target.classList.add("active", "current-active");
+        }
+    };
+
+    Box.onmouseover = function(e) {
+        var target = e.target;
+        if (target.classList.contains("star")) {
+            removeClass(Star, "active");
+            target.classList.add("active");
+            mouseOverActiveClass(Star);
+        }
+    };
+    Box.onmouseout = function() {
+        addClass(Star, "active");
+        mouseOutActiveClass(Star);
+    };
+
+    function removeClass(arr) {
+        for (var i = 0, iLen = arr.length; i < iLen; i++) {
+            for (var j = 1; j < arguments.length; j++) {
+                Star[i].classList.remove(arguments[j]);
+            }
+        }
+    }
+    function addClass(arr) {
+        for (var i = 0, iLen = arr.length; i < iLen; i++) {
+            for (var j = 1; j < arguments.length; j++) {
+                Star[i].classList.add(arguments[j]);
+            }
+        }
+    }
+
+    function mouseOverActiveClass(arr) {
+        for (var i = 0, iLen = arr.length; i < iLen; i++) {
+            if (arr[i].classList.contains("active")) {
+                break;
+            } else {
+                arr[i].classList.add("active");
+            }
+        }
+    }
+
+    function mouseOutActiveClass(arr) {
+        for (var i = arr.length - 1; i >= 1; i--) {
+            if (arr[i].classList.contains("current-active")) {
+                break;
+            } else {
+                arr[i].classList.remove("active");
+            }
+        }
+    }
+
+
+
+
+</script>
+</body>
+</html>
